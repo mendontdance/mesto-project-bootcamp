@@ -1,0 +1,22 @@
+.card__button-like {
+    width: 22px;
+    height: 19px;
+    border: none;
+    background-color: transparent;
+    padding: 0;
+    cursor: pointer;
+    transition: opacity .3s ease-in-out;
+    background-image: url('../../../images/card__icon.svg');
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+    transition: opacity .3s ease-in-out;
+}
+
+.card__button-like:hover {
+    opacity: 0.5;
+}
+
+.card__button-like:active {
+    background-image: url('../../../images/card__icon_active.svg');
+    opacity: 1;
+}
