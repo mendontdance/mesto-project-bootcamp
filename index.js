@@ -19,7 +19,7 @@ const popupInputText = document.querySelector('.popup__input_type_text');
 popupInputName.value = profileName.textContent;
 popupInputText.value = profileText.textContent;
 
-const a = document.querySelector('.popup__save');
+const popupSaveSubmit = document.querySelector('.popup__save');
 
 function handleFormSubmit(evt) {
     evt.preventDefault();
@@ -30,4 +30,4 @@ function handleFormSubmit(evt) {
     popupEditOpenClose();
 }
 
-a.addEventListener('click', handleFormSubmit)
+popupSaveSubmit.addEventListener('click', handleFormSubmit);
