@@ -1,4 +1,4 @@
-.form__container {
+.popup__container {
     position: relative;
     box-sizing: border-box;
     background-color: #fff;
@@ -8,15 +8,13 @@
     flex-direction: column;
     padding: 34px 36px 37px 36px;
     width: 430px;
-    height: 330px;
     z-index: 1000;
 }
 
 @media screen and (max-width: 880px) {
 
-    .form__container {
+    .popup__container {
         width: 282px;
-        height: 322px;
         padding: 25px 22px;
     }
 

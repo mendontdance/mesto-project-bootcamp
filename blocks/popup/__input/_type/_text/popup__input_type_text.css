@@ -1,7 +1,7 @@
-.form__name {
+.popup__input_type_text {
     outline: none;
+    margin-bottom: 45px;
     padding: 0;
-    margin-bottom: 25px;
     border: none;
     padding-bottom: 13px;
     border-bottom: 1px solid rgba(0, 0, 0, 0.2);
@@ -14,9 +14,9 @@
 }
 
 @media screen and (max-width:880px) {
-    .form__name {
+    .popup__input_type_text {
         font-size: 14px;
         line-height: 17px;
-        margin-bottom: 27px;
+        margin-bottom: 37px;
     }
 }

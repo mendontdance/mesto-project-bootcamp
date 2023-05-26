@@ -3,12 +3,13 @@
     align-items: center;
     flex-wrap: wrap;
     margin-right: auto;
-    width: 336px;
+    gap: 16px;
+    max-width: 336px;
 }
 
 @media screen and (max-width: 880px) {
     .profile__info {
-        width: 282px;
+        max-width: 282px;
         margin-top: 26px;
         margin-right: 0;
     }
