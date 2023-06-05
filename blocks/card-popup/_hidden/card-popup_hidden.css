@@ -17,6 +17,6 @@
     }
 }
 
-.card__popup_hidden {
+.card-popup_hidden {
     transition: opacity 1s, visibility 1s, fadeOut 1s ease-in-out;
 }

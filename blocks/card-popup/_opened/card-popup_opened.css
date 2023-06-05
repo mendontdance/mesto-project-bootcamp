@@ -13,7 +13,7 @@
     }
 }
 
-.card__popup_opened {
+.card-popup_opened {
     display: flex;
     visibility: visible;
     opacity: 1;

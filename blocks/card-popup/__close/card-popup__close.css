@@ -1,4 +1,4 @@
-.card__popup-close {
+.card-popup__close {
     padding: 0;
     border: none;
     font: inherit;
@@ -17,12 +17,12 @@
     transition: opacity .3s ease-in-out;
 }
 
-.card__popup-close:hover {
+.card-popup__close:hover {
     opacity: 0.6;
 }
 
 @media screen and (max-width: 880px) {
-    .card__popup-close {
+    .card-popup__close {
         width: 20px;
         height: 20px;
         top: -36px;
