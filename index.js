@@ -119,6 +119,7 @@ function fillCards() {
                 cardOpened.classList.toggle('card__popup_opened');
             }
             cardPopupImage.setAttribute('src', cardImage.getAttribute('src'));
+            cardPopupImage.setAttribute('alt', cardImage.getAttribute('alt'));
             cardPopupDescription.textContent = cardTitle.textContent;
         })
         cards.append(cardCreation);
@@ -191,6 +192,7 @@ function popupAddOpenClose() {
                 cardOpened.classList.toggle('card__popup_opened');
             }
             cardPopupImage.setAttribute('src', cardImage.getAttribute('src'));
+            cardPopupImage.setAttribute('alt', cardImage.getAttribute('alt'));
             cardPopupDescription.textContent = cardTitle.textContent;
         })
 
