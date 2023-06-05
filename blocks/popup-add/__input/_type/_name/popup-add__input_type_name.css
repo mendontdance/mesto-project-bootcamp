@@ -1,4 +1,4 @@
-.popup__input_type_name {
+.popup-add__input_type_name {
     outline: none;
     padding: 0;
     margin-bottom: 25px;
@@ -14,7 +14,7 @@
 }
 
 @media screen and (max-width:880px) {
-    .popup__input_type_name {
+    .popup-add__input_type_name {
         font-size: 14px;
         line-height: 17px;
         margin-bottom: 27px;

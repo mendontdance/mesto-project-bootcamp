@@ -1,4 +1,4 @@
-.popup__close {
+.popup-edit__close {
     content: "";
     position: absolute;
     width: 32px;
@@ -18,13 +18,13 @@
     background-color: transparent;
 }
 
-.popup__close:hover {
+.popup-edit__close:hover {
     opacity: 0.6;
 }
 
 @media screen and (max-width: 880px) {
 
-    .popup__close {
+    .popup-edit__close {
         content: "";
         width: 20px;
         height: 20px;

@@ -33,13 +33,25 @@
 @import url('../blocks/footer/footer.css');
 @import url('../blocks/footer/__copyright/footer__copyright.css');
 
-@import url('../blocks/popup/popup.css');
-@import url('../blocks/popup/__close/popup__close.css');
-@import url('../blocks/popup/__container/popup__container.css');
-@import url('../blocks/popup/__save/popup__save.css');
-@import url('../blocks/popup/__title/popup__title.css');
-@import url('../blocks/popup/_opened/popup_opened.css');
-@import url('../blocks/popup/__input/popup__input.css');
-@import url('../blocks/popup/__input/_type/_name/popup__input_type_name.css');
-@import url('../blocks/popup/__input/_type/_text/popup__input_type_text.css');
-@import url('../blocks/popup/_closed/popup_closed.css');
+@import url('../blocks/popup-add/popup-add.css');
+@import url('../blocks/popup-add/_opened/popup-add_opened.css');
+@import url('../blocks/popup-add/_closed/popup-add_closed.css');
+@import url('../blocks/popup-add/__title/popup-add__title.css');
+@import url('../blocks/popup-add/__save/popup-add__save.css');
+@import url('../blocks/popup-add/__input/_type/_name/popup-add__input_type_name.css');
+
+@import url('../blocks/popup-add/__input/_type/_text/popup-add__input_type_text.css');
+@import url('../blocks/popup-add/__input/popup-add__input.css');
+@import url('../blocks/popup-add/__container/popup-add__container.css');
+@import url('../blocks/popup-add/__close/popup-add__close.css');
+
+@import url('../blocks/popup-edit/popup-edit.css');
+@import url('../blocks/popup-edit/__close/popup-edit__close.css');
+@import url('../blocks/popup-edit/__container/popup-edit__container.css');
+@import url('../blocks/popup-edit/__input/popup-edit__input.css');
+@import url('../blocks/popup-edit/__input/_type/_name/popup-edit__input_type_name.css');
+@import url('../blocks/popup-edit/__input/_type/_text/popup-edit__input_type_text.css');
+@import url('../blocks/popup-edit/__save/popup-edit__save.css');
+@import url('../blocks/popup-edit/__title/popup-edit__title.css');
+@import url('../blocks/popup-edit/_closed/popup-edit_closed.css');
+@import url('../blocks/popup-edit/_opened/popup-edit_opened.css');

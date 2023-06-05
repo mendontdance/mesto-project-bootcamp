@@ -14,6 +14,6 @@
     }
 }
 
-.popup_closed {
+.popup-edit_closed {
     transition: opacity 1s, visibility 1s, fadeOut 1s ease-in-out;
 }
