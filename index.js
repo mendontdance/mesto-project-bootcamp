@@ -123,7 +123,7 @@ function cardCreation(cardObj) {
 // Формируем карточки
 initialCards.forEach((elem) => cardCreation(elem));
 
-// Добавляем ссылки на картинки и текст к картинке, а также подпись картинки
+// Функция нажатия на картинку для появления всплывающей карточки
 function addingImages() {
     const cardsImage = document.querySelectorAll('.card__image');
     const cardsTitle = document.querySelectorAll('.card__title');
@@ -151,6 +151,7 @@ function likeCard() {
     })
 }
 
+// Функция удаления карточки
 function deleteCard() {
     const cardTrashes = document.querySelectorAll('.card__trash');
     // Событие удаления карточки
