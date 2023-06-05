@@ -1,0 +1,19 @@
+@keyframes fadeOut{
+    0% {
+        visibility: visible;
+        opacity: 1;
+    }
+    99% {
+        visibility: visible;
+        opacity: 0;
+
+    }
+    100% {
+        opacity: 0;
+        visibility: hidden;
+    }
+}
+
+.popup_closed {
+    transition: opacity 1s, visibility 1s, fadeOut 1s ease-in-out;
+}

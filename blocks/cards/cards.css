@@ -3,6 +3,8 @@
     display: flex;
     gap: 20px 17px;
     flex-wrap: wrap;
+    position: relative;
+    z-index: 10;
 }
 
 @media screen and (max-width: 880px) {

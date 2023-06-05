@@ -1,0 +1,14 @@
+.card__popup {
+    position: fixed;
+    display: flex;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, .5);
+    z-index: 1000;
+    visibility: hidden;
+    opacity: 0;
+    justify-content: center;
+    align-items: center;
+}

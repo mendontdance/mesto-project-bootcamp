@@ -1,0 +1,22 @@
+@keyframes fadeOut{
+    0% {
+        visibility: visible;
+        display: flex;
+        opacity: 1;
+    }
+    99% {
+        visibility: visible;
+        display: flex;
+        opacity: 0;
+
+    }
+    100% {
+        opacity: 0;
+        display: none;
+        visibility: hidden;
+    }
+}
+
+.card__popup_hidden {
+    transition: opacity 1s, visibility 1s, fadeOut 1s ease-in-out;
+}

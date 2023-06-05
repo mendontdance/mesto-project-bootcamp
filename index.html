@@ -24,64 +24,43 @@
             </div>
             <button type="button" class="profile__button-add" aria-label="Добавить карточку"></button>
         </section>
-        <section class="cards">
-            <figure class="card">
-                <img src="images/card__image1.jpg" alt="Старая крепость на фоне горы" class="card__image">
-                <figcaption class="card__description">
-                    <h3 class="card__title">Карачаевск</h3>
-                    <button type="button" class="card__button-like" aria-label="Поставить лайк"></button>
-                </figcaption>
-            </figure>
-            <figure class="card">
-                <img src="images/card__image2.jpg" alt="Старая крепость на фоне горы" class="card__image">
-                <figcaption class="card__description">
-                    <h3 class="card__title">Гора Эльбрус</h3>
-                    <button type="button" class="card__button-like" aria-label="Поставить лайк"></button>
-                </figcaption>
-            </figure>
-            <figure class="card">
-                <img src="images/card__image3.jpg" alt="Старая крепость на фоне горы" class="card__image">
-                <figcaption class="card__description">
-                    <h3 class="card__title">Домбай</h3>
-                    <button type="button" class="card__button-like" aria-label="Поставить лайк"></button>
-                </figcaption>
-            </figure>
-            <figure class="card">
-                <img src="images/card__image4.jpg   " alt="Старая крепость на фоне горы" class="card__image">
-                <figcaption class="card__description">
-                    <h3 class="card__title">Гора Эльбрус</h3>
-                    <button type="button" class="card__button-like" aria-label="Поставить лайк"></button>
-                </figcaption>
-            </figure>
-            <figure class="card">
-                <img src="images/card__image5.jpg" alt="Старая крепость на фоне горы" class="card__image">
-                <figcaption class="card__description">
-                    <h3 class="card__title">Домбай</h3>
-                    <button type="button" class="card__button-like" aria-label="Поставить лайк"></button>
-                </figcaption>
-            </figure>
-            <figure class="card">
-                <img src="images/card__image6.jpg" alt="Старая крепость на фоне горы" class="card__image">
-                <figcaption class="card__description">
-                    <h3 class="card__title">Карачаевско-Черкессия</h3>
-                    <button type="button" class="card__button-like" aria-label="Поставить лайк"></button>
-                </figcaption>
-            </figure>
-        </section>
-
+        <section class="cards"></section>
     </main>
 
-    <div class="popup"><!-- Здесь будет добавляться класс popup_opened через JavaScript -->
-        <div class="popup__container">
-            <button type="button" class="popup__close" aria-label="Закрыть модальное окно"></button>
-            <h2 class="popup__title">Редактировать профиль</h2>
-            <form action="#" class="popup__form" name="profile-form" type="submit">
-                <input type="text" class="popup__input popup__input_type_name" name="popup__input_type_name" placeholder="Введите имя">
-                <input type="text" class="popup__input popup__input_type_text" name="popup__input_type_text" placeholder="Введите описание профиля">
-                <button type="button" class="popup__save" aria-label="Сохранить профиль">Сохранить</button>
-            </form>
+    <template id="card-template">
+        <figure class="card">
+            <img src="" alt="" class="card__image">
+            <button class="card__trash"></button>
+            <figcaption class="card__description">
+                <h3 class="card__title"></h3>
+                <button type="button" class="card__button-like" aria-label="Поставить лайк"></button>
+            </figcaption>
+        </figure>
+    </template>
+
+    <div class="card__popup">
+        <div class="card__popup-container">
+            <button type="button" class="card__popup-close" aria-label="Закрыть модальное окно"></button>
+            <img src="" alt="" class="card__popup-image">
+            <p class="card__popup-description"></p>
         </div>
     </div>
+
+    <template id="popup-template">
+        <div class="popup"><!-- Здесь будет добавляться класс popup_opened через JavaScript -->
+            <div class="popup__container">
+                <button type="button" class="popup__close" aria-label="Закрыть модальное окно"></button>
+                <h2 class="popup__title"></h2>
+                <form action="#" class="popup__form" name="popup-form" type="submit">
+                    <input type="text" class="popup__input popup__input_type_name" name="popup__input_type_name"
+                        placeholder="">
+                    <input type="text" class="popup__input popup__input_type_text" name="popup__input_type_text"
+                        placeholder="">
+                    <button type="button" class="popup__save" aria-label="Сохранить"></button>
+                </form>
+            </div>
+        </div>
+    </template>
 
     <footer class="footer">
         <p class="footer__copyright">© 2020 Mesto Russia</p>
