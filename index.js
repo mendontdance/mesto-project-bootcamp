@@ -5,12 +5,12 @@
 const profileButtonEdit = document.querySelector('.profile__button-edit');
 const profileName = document.querySelector('.profile__name');
 const profileText = document.querySelector('.profile__text');
-const popupEdit = document.querySelector('.popup-edit')
-const popupEditClose = document.querySelector('.popup-edit__close');
-const popupEditTitle = document.querySelector('.popup-edit__title');
-const popupEditInputName = document.querySelector('.popup-edit__input_type_name');
-const popupEditInputText = document.querySelector('.popup-edit__input_type_text');
-const popupEditSave = document.querySelector('.popup-edit__save');
+const popupEdit = document.querySelector('.popup_edit')
+const popupEditClose = document.querySelector('.popup__close_edit');
+const popupEditTitle = document.querySelector('.popup__title_edit');
+const popupEditInputName = document.querySelector('.popup__input_name_edit');
+const popupEditInputText = document.querySelector('.popup__input_text_edit');
+const popupEditSave = document.querySelector('.popup__save_edit');
 
 // Исходные данные
 popupEditInputName.value = profileName.textContent;
@@ -19,14 +19,14 @@ popupEditInputText.value = profileText.textContent;
 // Функция открытия модального окна
 
 function popupEditOpen() {
-    popupEdit.classList.add('popup-edit_opened');
-    popupEdit.classList.remove('popup-edit_closed');
+    popupEdit.classList.add('popup_opened');
+    popupEdit.classList.remove('popup_hidden');
 }
 
 // Функция закрытия модального окна
 function popupEditHide() {
-    popupEdit.classList.remove('popup-edit_opened');
-    popupEdit.classList.add('popup-edit_closed');
+    popupEdit.classList.remove('popup_opened');
+    popupEdit.classList.add('popup_hidden');
 }
 
 // Функция сохранения данных (кнопка сохранить)
@@ -77,25 +77,25 @@ const initialCards = [
 // Формируем блок карточек из массива
 const cardTemplate = document.querySelector('#card-template').content;
 const cards = document.querySelector('.cards');
-const cardOpened = document.querySelector('.card-popup');
-const cardPopupImage = document.querySelector('.card-popup__image');
-const cardPopupClose = document.querySelector('.card-popup__close');
-const cardPopupDescription = document.querySelector('.card-popup__description');
+const cardOpened = document.querySelector('.popup_card');
+const cardPopupImage = document.querySelector('.popup__image_card');
+const cardPopupClose = document.querySelector('.popup__close_card');
+const cardPopupTitle = document.querySelector('.popup__title_card');
 
 // Функция открытия всплывающей карточки
 function cardPopupOpen() {
-    cardOpened.classList.remove('card-popup_hidden')
-    cardOpened.classList.add('card-popup_opened');
+    cardOpened.classList.remove('popup_hidden');
+    cardOpened.classList.add('popup_opened');
 }
 
 // Функция закрытия всплывающей карточки
 function cardPopupHide() {
-    cardOpened.classList.remove('card-popup_opened');
-    cardOpened.classList.add('card-popup_hidden')
+    cardOpened.classList.remove('popup_opened');
+    cardOpened.classList.add('popup_hidden');
 }
 
 // Функция формирования карточек из массива initialCards
-function cardCreation(cardObj) {
+function creatingCard(cardObj) {
     const cardCreation = cardTemplate.querySelector('.card').cloneNode('true');
     const cardImage = cardCreation.querySelector('.card__image');
     const cardTitle = cardCreation.querySelector('.card__title');
@@ -107,60 +107,32 @@ function cardCreation(cardObj) {
     cardImage.setAttribute('src', cardObj.link);
     cardImage.setAttribute('alt', cardObj.name);
 
-    // Добавляем карточку в массив
+    // Добавляем карточку в разметку
     cards.prepend(cardCreation);
 
-    // Событие нажатия на картинку для появления всплывающей карточки
-    addingImages();
-
     // Событие нажатия на лайк
-    likeCard();
+    cardButtonLike.addEventListener('click', function (evt) {
+        evt.target.classList.toggle('card__button-like_active')
+    })
+
+    // Событие нажатия на картинку для появления всплывающей карточки
+    cardImage.addEventListener('click', function () {
+
+        cardPopupImage.setAttribute('src', cardImage.getAttribute('src'));
+        cardPopupImage.setAttribute('alt', cardImage.getAttribute('alt'));
+        cardPopupTitle.textContent = cardTitle.textContent;
+
+        cardPopupOpen();
+    })
 
     // Событие удаления карточки
-    deleteCard();
+    cardTrash.addEventListener('click', function () {
+        cardCreation.remove();
+    })
 }
 
 // Формируем карточки
-initialCards.forEach((elem) => cardCreation(elem));
-
-// Функция нажатия на картинку для появления всплывающей карточки
-function addingImages() {
-    const cardsImage = document.querySelectorAll('.card__image');
-    const cardsTitle = document.querySelectorAll('.card__title');
-
-    for (let i = 0; i < cardsImage.length; i++) {
-        cardsImage[i].addEventListener('click', function () {
-
-            cardPopupImage.setAttribute('src', cardsImage[i].getAttribute('src'));
-            cardPopupImage.setAttribute('alt', cardsImage[i].getAttribute('alt'));
-            cardPopupDescription.textContent = cardsTitle[i].textContent;
-
-            cardPopupOpen();
-        })
-    }
-}
-
-// Функция нажатия на лайк
-function likeCard() {
-    const cardButtonLikes = document.querySelectorAll('.card__button-like');
-
-    cardButtonLikes.forEach(elem => {
-        elem.addEventListener('click', function (evt) {
-            evt.target.classList.toggle('card__button-like_active')
-        })
-    })
-}
-
-// Функция удаления карточки
-function deleteCard() {
-    const cardTrashes = document.querySelectorAll('.card__trash');
-    // Событие удаления карточки
-    cardTrashes.forEach(elem => {
-        elem.addEventListener('click', function () {
-            elem.closest('.card').remove()
-        })
-    })
-}
+initialCards.forEach((elem) => creatingCard(elem))
 
 // Событие клика на закрытие карточки
 cardPopupClose.addEventListener('click', cardPopupHide)
@@ -169,12 +141,12 @@ cardPopupClose.addEventListener('click', cardPopupHide)
 // Добавление новой карточки в массив
 const profileButtonAdd = document.querySelector('.profile__button-add');
 const page = document.querySelector('.page');
-const popupAdd = document.querySelector('.popup-add');
-const popupAddClose = document.querySelector('.popup-add__close');
-const popupAddTitle = document.querySelector('.popup-add__title');
-const popupAddInputName = document.querySelector('.popup-add__input_type_name');
-const popupAddInputText = document.querySelector('.popup-add__input_type_text');
-const popupAddSave = document.querySelector('.popup-add__save');
+const popupAdd = document.querySelector('.popup_add');
+const popupAddClose = document.querySelector('.popup__close_add');
+const popupAddTitle = document.querySelector('.popup__title_add');
+const popupAddInputName = document.querySelector('.popup__input_name_add');
+const popupAddInputText = document.querySelector('.popup__input_text_add');
+const popupAddSave = document.querySelector('.popup__save_add');
 
 // Исходные данные
 popupAddInputName.value = '';
@@ -184,30 +156,33 @@ popupAddInputText.value = '';
 popupAddSave.addEventListener('click', function (evt) {
     evt.preventDefault();
 
-    // Добавляем карточку в массив initialCards
+    // Добавляем карточку в начало массива initialCards
     initialCards.unshift({
         'name': popupAddInputName.value,
         'link': popupAddInputText.value
     });
 
     // Создаем карточку и добавляем в html-структуру
-    cardCreation(initialCards[0])
+    creatingCard(initialCards[0])
+
+    popupAddInputName.value = '';
+    popupAddInputText.value = '';
 
     popupAddHide();
 });
 
-// Функция открытия формы "+"
+// Функция открытия модульного окна "+"
 function popupAddOpen() {
-    popupAdd.classList.add('popup-add_opened');
-    popupAdd.classList.remove('popup-add_closed')
+    popupAdd.classList.add('popup_opened');
+    popupAdd.classList.remove('popup_hidden')
 }
-// Функция закрытия формы "+"
+// Функция закрытия модульного окна "+"
 function popupAddHide() {
-    popupAdd.classList.remove('popup-add_opened');
-    popupAdd.classList.add('popup-add_closed')
+    popupAdd.classList.remove('popup_opened');
+    popupAdd.classList.add('popup_hidden')
 }
 
-// Событие закрытия формы
+// Событие закрытия модульного окна "+"
 popupAddClose.addEventListener('click', popupAddHide)
 
 // Событие нажатия на кнопку "+"
