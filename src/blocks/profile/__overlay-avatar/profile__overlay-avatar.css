@@ -1,0 +1,39 @@
+.profile__overlay-avatar {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    margin-right: 30px;
+    background-color: rgb(0, 0, 0);
+    opacity: 1;
+    z-index: 10;
+}
+.profile__overlay-avatar::before {
+    content:"";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgb(0, 0, 0);
+    background-image: url('../../../images/profile__avatar-icon.svg');
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+    opacity: 0;
+    transition: opacity .3s ease-in-out;
+    z-index: 10;
+    cursor: pointer;
+}
+
+.profile__overlay-avatar:hover::before {
+    opacity: 0.8;
+}
+
+@media screen and (max-width: 900px) {
+    .profile__overlay-avatar {
+        margin: 0;
+    }
+}

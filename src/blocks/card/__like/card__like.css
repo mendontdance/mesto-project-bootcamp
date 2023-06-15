@@ -1,0 +1,7 @@
+.card__like {
+    display: flex;
+    flex: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}

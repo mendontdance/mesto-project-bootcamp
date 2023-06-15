@@ -5,6 +5,7 @@
     margin-right: auto;
     gap: 16px;
     max-width: 336px;
+    min-height: 103px;
 }
 
 @media screen and (max-width: 900px) {

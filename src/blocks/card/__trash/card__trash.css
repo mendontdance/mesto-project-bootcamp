@@ -1,4 +1,5 @@
 .card__trash {
+    display: none;
     background-image: url('../../../images/card__trash.svg');
     padding: 0;
     border: none;

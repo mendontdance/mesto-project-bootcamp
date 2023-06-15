@@ -21,6 +21,9 @@
 @import url('../blocks/card/__button-like/card__button-like.css');
 @import url('../blocks/card/__button-like/_active/card__button-like_active.css');
 @import url('../blocks/card/__trash/card__trash.css');
+@import url('../blocks/card/__like/card__like.css');
+@import url('../blocks/card/__counter-like/card__counter-like.css');
+@import url('../blocks/card/__trash/_active/card__trash_active.css');
 
 @import url('../blocks/footer/footer.css');
 @import url('../blocks/footer/__copyright/footer__copyright.css');
@@ -28,7 +31,6 @@
 @import url('../blocks/popup/popup.css');
 @import url('../blocks/popup/_opened/popup_opened.css');
 @import url('../blocks/popup/__container/popup__container.css');
-@import url('../blocks/popup/_hidden/popup_hidden.css');
 @import url('../blocks/popup/__title/popup__title.css');
 @import url('../blocks/popup/__close/popup__close.css');
 @import url('../blocks/popup/__image/popup__image.css');
@@ -38,18 +40,17 @@
 @import url('../blocks/popup/__input/_name/popup__input_name.css');
 
 @import url('../blocks/popup/__container/_add/popup__container_add.css');
-
 @import url('../blocks/popup/__title/_add/popup__title_add.css');
-
 @import url('../blocks/popup/__container/_edit/popup__container_edit.css');
-
-
 @import url('../blocks/popup/__title/_edit/popup-edit__title.css');
 @import url('../blocks/popup/__container/_card/popup__container_card.css');
 @import url('../blocks/popup/__title/_card/popup__title_card.css');
 @import url('../blocks/popup/__input/_text/popup__input_text.css');
-
 @import url('../blocks/popup/__save/_inactive/popup__save_inactive.css');
 @import url('../blocks/popup/__input-error/popup__input-error.css');
 @import url('../blocks/popup/__input/_type/_error/popup__input_type_error.css');
 @import url('../blocks/popup/__input-error/_active/popup__input-error_active.css');
+
+@import url('../blocks/profile/__overlay-avatar/profile__overlay-avatar.css');
+@import url('../blocks/popup/__container/_avatar/popup__container_avatar.css');
+@import url('../blocks/popup/__title/_avatar/popup__title_avatar.css');

@@ -1,32 +1,47 @@
-const popupAddInputName = document.querySelector('.popup__input_name_add');
-const popupAddInputText = document.querySelector('.popup__input_text_add');
+
 const popupEditInputName = document.querySelector('.popup__input_name_edit');
 const popupEditInputText = document.querySelector('.popup__input_text_edit');
 const profileName = document.querySelector('.profile__name');
 const profileText = document.querySelector('.profile__text');
 
-// Исходные данные
-function profileInfo() {
-    popupEditInputName.value = profileName.textContent;
-    popupEditInputText.value = profileText.textContent;
-  }
-
 // Функция открытия модального окна
-function popupOpen(evt) {
-    evt.classList.add('popup_opened');
-    evt.classList.remove('popup_hidden')
+function openPopup(evt) {
+  evt.classList.add('popup_opened');
+
+  document.addEventListener('keydown', hidePopupByEsc);
+  evt.addEventListener('mousedown', hidePopupByOverlay);
 }
+
+
+document.querySelectorAll('.popup__close').forEach(button => {
+  const popupCloseBtn = button.closest('.popup'); // нашли родителя с нужным классом
+  button.addEventListener('click', () => hidePopup(popupCloseBtn)); // закрыли попап
+});
 
 // Функция закрытия модульного окна
-function popupHide(evt) {
-    evt.classList.remove('popup_opened');
-    evt.classList.add('popup_hidden')
+function hidePopup(evt) {
+  evt.classList.remove('popup_opened');
+
+  document.removeEventListener('keydown', hidePopupByEsc);
+  evt.removeEventListener('mousedown', hidePopupByOverlay);
 }
 
-// Функция сброса всех данных в инпутах карточки
-function popupAddInputReset() {
-    popupAddInputName.value = '';
-    popupAddInputText.value = '';
+function hidePopupByEsc(evt) {
+  if (evt.key === 'Escape') {
+    const openedPopup = document.querySelector('.popup_opened');
+    hidePopup(openedPopup);
   }
+}
 
-export {popupOpen, popupHide, popupAddInputReset, popupAddInputName, popupEditInputText, popupEditInputName, popupAddInputText, profileInfo, profileName, profileText}
+function hidePopupByOverlay(evt) {
+  const openedPopup = document.querySelector('.popup_opened');
+  // const popupForm = document.querySelector('.popup_opened').querySelector('.popup__form');
+  // popupForm.addEventListener('submit', function (evt) {
+  //   evt.preventDefault();
+  // });
+  if (evt.target === evt.currentTarget) {
+    hidePopup(openedPopup);
+  }
+}
+
+export { openPopup, hidePopup, popupEditInputText, popupEditInputName, profileName, profileText }
