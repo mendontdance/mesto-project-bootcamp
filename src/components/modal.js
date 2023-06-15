@@ -1,4 +1,3 @@
-
 const popupEditInputName = document.querySelector('.popup__input_name_edit');
 const popupEditInputText = document.querySelector('.popup__input_text_edit');
 const profileName = document.querySelector('.profile__name');
@@ -29,16 +28,14 @@ function hidePopup(evt) {
 function hidePopupByEsc(evt) {
   if (evt.key === 'Escape') {
     const openedPopup = document.querySelector('.popup_opened');
+    
     hidePopup(openedPopup);
   }
 }
 
 function hidePopupByOverlay(evt) {
   const openedPopup = document.querySelector('.popup_opened');
-  // const popupForm = document.querySelector('.popup_opened').querySelector('.popup__form');
-  // popupForm.addEventListener('submit', function (evt) {
-  //   evt.preventDefault();
-  // });
+
   if (evt.target === evt.currentTarget) {
     hidePopup(openedPopup);
   }

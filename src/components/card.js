@@ -2,7 +2,7 @@ import { openPopup } from './modal';
 import { setLike, delLike, delCard } from './api';
 
 ///////////////////////////////////////////////////////////////////////
-// Формируем блок карточек из массива
+// Формируем карточки
 const cardTemplate = document.querySelector('#card-template').content;
 const cardOpened = document.querySelector('.popup_card');
 const cardPopupImage = document.querySelector('.popup__image_card');
@@ -11,7 +11,7 @@ const cards = document.querySelector('.cards');
 const popupAddInputName = document.querySelector('.popup__input_name_add');
 const popupAddInputText = document.querySelector('.popup__input_text_add');
 
-// Функция формирования карточек из массива из JSON
+// Функция формирования карточки
 function creatingCard(cardObj, userId) {
     const cardCreation = cardTemplate.querySelector('.card').cloneNode('true');
     const cardImage = cardCreation.querySelector('.card__image');
@@ -25,21 +25,26 @@ function creatingCard(cardObj, userId) {
     cardImage.setAttribute('src', cardObj.link);
     cardImage.setAttribute('alt', cardObj.name);
 
+////////////////////////////////////////////////////////////////////////////////
+// Лайки
 
-    // like
     let cardLikes = cardObj.likes;
     cardCounterLike.textContent = cardLikes.length;
 
+    // Загрузка проставленных ранее лайков
     loadLikes(cardLikes, userId)
 
-    function handleLikeButton() {
-        function queryMethod() {
-            if (isLiked(cardLikes, userId)) {
-                return delLike(cardObj._id)
-            } else {
-                return setLike(cardObj._id)
-            }
+    // Функция проверки лайкнул ли пользователь карточку или нет (по айди)
+    function queryMethod() {
+        if (isLiked(cardLikes, userId)) {
+            return delLike(cardObj._id)
+        } else {
+            return setLike(cardObj._id)
         }
+    }
+
+    //Функция постановки лайка при клике
+    function handleLikeButton() {
         queryMethod()
             .then(res => {
                 updateLike(res.likes)
@@ -47,10 +52,12 @@ function creatingCard(cardObj, userId) {
             .catch(err => console.log(err))
     }
 
+    //Функция проверки ставил ли пользователь лайк (по айди)
     function isLiked(likesArray, userId) {
         return likesArray.some(item => item._id === userId)
     }
 
+    //Функция прогрузки лайков с сервера на страницу
     function loadLikes(likesArray, userId) {
         if (isLiked(cardLikes, userId)) {
             cardButtonLike.classList.add('card__button-like_active');
@@ -58,6 +65,7 @@ function creatingCard(cardObj, userId) {
         }
     }
 
+    //Функция обновления лайка
     function updateLike(likesArray) {
         cardLikes = likesArray;
         if (cardButtonLike.classList.contains('card__button-like_active')) {
@@ -81,7 +89,7 @@ function creatingCard(cardObj, userId) {
 
         openPopup(cardOpened);
     })
-
+    // Проверка карточка ли пользователя это или нет, если да, то может удалить свою карточку
     if (cardObj.owner._id === userId) {
         cardTrash.classList.add('card__trash_active');
         cardTrash.addEventListener('click', () => {
@@ -95,6 +103,7 @@ function creatingCard(cardObj, userId) {
         cardTrash.remove();
     }
 
+    // Возвращаем созданную карточку для последующих операций
     return cardCreation;
 }
 
