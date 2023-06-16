@@ -1,4 +1,4 @@
-import { openPopup } from './modal';
+import { openPopup, hidePopup } from './modal';
 import { setLike, delLike, delCard } from './api';
 
 ///////////////////////////////////////////////////////////////////////
@@ -10,6 +10,7 @@ const cardPopupTitle = document.querySelector('.popup__title_card');
 const cards = document.querySelector('.cards');
 const popupAddInputName = document.querySelector('.popup__input_name_add');
 const popupAddInputText = document.querySelector('.popup__input_text_add');
+const popupAdd = document.querySelector('.popup_add');
 
 // Функция формирования карточки
 function creatingCard(cardObj, userId) {
@@ -25,8 +26,8 @@ function creatingCard(cardObj, userId) {
     cardImage.setAttribute('src', cardObj.link);
     cardImage.setAttribute('alt', cardObj.name);
 
-////////////////////////////////////////////////////////////////////////////////
-// Лайки
+    ////////////////////////////////////////////////////////////////////////////////
+    // Лайки
 
     let cardLikes = cardObj.likes;
     cardCounterLike.textContent = cardLikes.length;
@@ -35,7 +36,7 @@ function creatingCard(cardObj, userId) {
     loadLikes(cardLikes, userId)
 
     // Функция проверки лайкнул ли пользователь карточку или нет (по айди)
-    function queryMethod() {
+    function changeLikeStatus() {
         if (isLiked(cardLikes, userId)) {
             return delLike(cardObj._id)
         } else {
@@ -45,7 +46,7 @@ function creatingCard(cardObj, userId) {
 
     //Функция постановки лайка при клике
     function handleLikeButton() {
-        queryMethod()
+        changeLikeStatus()
             .then(res => {
                 updateLike(res.likes)
             })
@@ -103,8 +104,26 @@ function creatingCard(cardObj, userId) {
         cardTrash.remove();
     }
 
+    loadImage(cardImage, cardImage.src, hidePopup(popupAdd), loadError);
+
     // Возвращаем созданную карточку для последующих операций
     return cardCreation;
 }
 
-export { creatingCard, cards, popupAddInputName, popupAddInputText, }
+// Функция вывода ошибки сохранения
+function loadError() {
+    console.log('Изображение не прогрузилось. Проверьте подключение.')
+}
+
+// Функция сохранения до того, как изображение прогрузится
+function loadImage(image, imageUrl, loading, errorCallback) {
+    const img = image;
+    img.src = imageUrl;
+    // Функция, которая записана в onload
+    // будет вызвана после загрузки изображения
+    img.onload = loading;
+    // В случае ошибки вылезет в консоль сообщение об ошибке
+    img.onerror = errorCallback;
+  }
+
+export { creatingCard, cards, popupAddInputName, popupAddInputText, popupAdd, loadError, loadImage }

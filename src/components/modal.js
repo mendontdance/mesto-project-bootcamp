@@ -4,25 +4,24 @@ const profileName = document.querySelector('.profile__name');
 const profileText = document.querySelector('.profile__text');
 
 // Функция открытия модального окна
-function openPopup(evt) {
-  evt.classList.add('popup_opened');
+function openPopup(popup) {
+  popup.classList.add('popup_opened');
 
   document.addEventListener('keydown', hidePopupByEsc);
-  evt.addEventListener('mousedown', hidePopupByOverlay);
+  popup.addEventListener('mousedown', hidePopupByOverlay);
 }
 
-
 document.querySelectorAll('.popup__close').forEach(button => {
-  const popupCloseBtn = button.closest('.popup'); // нашли родителя с нужным классом
-  button.addEventListener('click', () => hidePopup(popupCloseBtn)); // закрыли попап
+  const popup = button.closest('.popup'); // нашли родителя с нужным классом
+  button.addEventListener('click', () => hidePopup(popup)); // закрыли попап
 });
 
 // Функция закрытия модульного окна
-function hidePopup(evt) {
-  evt.classList.remove('popup_opened');
+function hidePopup(popup) {
+  popup.classList.remove('popup_opened');
 
   document.removeEventListener('keydown', hidePopupByEsc);
-  evt.removeEventListener('mousedown', hidePopupByOverlay);
+  popup.removeEventListener('mousedown', hidePopupByOverlay);
 }
 
 function hidePopupByEsc(evt) {
@@ -34,10 +33,8 @@ function hidePopupByEsc(evt) {
 }
 
 function hidePopupByOverlay(evt) {
-  const openedPopup = document.querySelector('.popup_opened');
-
   if (evt.target === evt.currentTarget) {
-    hidePopup(openedPopup);
+    hidePopup(evt.currentTarget);
   }
 }
 

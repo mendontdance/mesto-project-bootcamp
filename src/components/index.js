@@ -1,7 +1,7 @@
 "use strict"
 
 import '../pages/index.css'; // импорт главного файла стилей
-import { creatingCard, cards, popupAddInputName, popupAddInputText, } from './card.js' // импорт функции создания карточки и закрытия всплывающего окна
+import { creatingCard, cards, popupAddInputName, popupAddInputText, popupAdd, loadError, loadImage } from './card.js' // импорт функции создания карточки и закрытия всплывающего окна
 import { openPopup, hidePopup, popupEditInputName, popupEditInputText, profileName, profileText } from './modal'; // импорт функции открытия и закрытия модального окна, а также добавления сброса модального окна "+"
 import { enableValidation, settingsValidation } from './validation';
 import { getProfileInfo, getCardArray, addCardToArray, editProfile, editAvatar } from './api';
@@ -16,7 +16,7 @@ const popupFormEdit = document.querySelector('.popup__form_edit')
 // Редактирование профиля
 
 // Исходные данные
-function profileInfo() {
+function fillProfileInfo() {
   popupEditInputName.value = profileName.textContent;
   popupEditInputText.value = profileText.textContent;
   popupEditSave.classList.remove('popup__save_inactive');
@@ -50,23 +50,25 @@ popupFormEdit.addEventListener('submit', function (evt) {
     .then(() => {
       hidePopup(popupEdit);
       resetPopupSave(popupEditSave);
-      enablePopupInput(popupEditInputName, popupEditInputText); // разблокируем инпуты после загрузки
     })
     .catch((err) => {
       console.log(err);
+    })
+    .finally(() => {
+      popupEditSave.textContent = 'Сохранить'
+      enablePopupInput(popupEditInputName, popupEditInputText); // разблокируем инпуты после загрузки
     })
 });
 
 // События нажатия на редактирования профиля (запуск функции открытия формы)
 profileButtonEdit.addEventListener('click', function () {
-  profileInfo();
+  fillProfileInfo();
   openPopup(popupEdit);
 });
 
 ///////////////////////////////////////////////////////////////////////
 // Добавление новой карточки в массив
 const profileButtonAdd = document.querySelector('.profile__button-add');
-const popupAdd = document.querySelector('.popup_add');
 const popupAddSave = document.querySelector('.popup__save_add');
 const popupFormAdd = document.querySelector('.popup__form_add')
 
@@ -89,33 +91,22 @@ popupFormAdd.addEventListener('submit', function (evt) {
   addCardToArray(newCard)
     .then((res) => {
       // Создаем карточку и добавляем в html-структуру
-      const newCreatedCard = createNewCard(res, userId);
-      const cardImage = newCreatedCard.querySelector('.card__image');
+      const newCreatedCard = creatingCard(res, userId);
       cards.prepend(newCreatedCard);
-      loadImage(cardImage, popupAddInputText.value, hidePopup(popupAdd), errorLoading);
     })
     .then(() => {
       // Убираем все данные с инпутов
-      popupAddInputReset();
+      resetPopupAddInput();
       // Делаем кнопку неактивной снова после добавления карточки
       makePopupAddInactive();
       resetPopupSave(popupAddSave);
-      enablePopupInput(popupAddInputName, popupAddInputText); // разблокируем инпуты после загрузки
-
     })
     .catch(err => console.log(err))
+    .finally(() => {
+      popupAddSave.textContent = 'Создать'
+      enablePopupInput(popupAddInputName, popupAddInputText); // разблокируем инпуты после загрузки
+    })
 });
-
-// Функция создания новой карточки
-function createNewCard(cardData, userId) {
-
-  const cardElement = creatingCard(cardData, userId);
-    // Добавляем опцию удаления карточки
-  const cardTrash = cardElement.querySelector('.card__trash');
-  cardTrash.classList.add('card__trash_active');
-
-  return cardElement
-}
 
 // Функция деактивации кнопки в модальном окне после добавления карточки
 function makePopupAddInactive() {
@@ -126,7 +117,7 @@ function makePopupAddInactive() {
 }
 
 // Функция сброса всех данных в инпутах карточки
-function popupAddInputReset() {
+function resetPopupAddInput() {
   popupAddInputName.value = '';
   popupAddInputText.value = '';
   popupAddSave.classList.add('popup__save_inactive');
@@ -135,7 +126,7 @@ function popupAddInputReset() {
 
 // Событие нажатия на кнопку "+"
 profileButtonAdd.addEventListener('click', function () {
-  popupAddInputReset();
+  resetPopupAddInput();
   openPopup(popupAdd);
 })
 
@@ -157,14 +148,13 @@ profileAvatar.addEventListener('click', () => {
 function resetPopupSave(popupSave) {
   popupSave.disabled = true;
   popupSave.classList.add('popup__save_inactive');
-  popupSave.textContent = 'Сохранить'
 }
 
 // События отправки формы загрузки изображения на сервер и вставка изображения в аватарку
 popupAvatarForm.addEventListener('submit', function (evt) {
   evt.preventDefault();
   popupInputAvatar.setAttribute('disabled', true)
-  loadImage(profileImage, popupInputAvatar.value, isLoading(popupAvatarSave), errorLoading)
+  loadImage(profileImage, popupInputAvatar.value, isLoading(popupAvatarSave), loadError)
 
   editAvatar(popupInputAvatar.value)
     .then((res) => {
@@ -176,29 +166,16 @@ popupAvatarForm.addEventListener('submit', function (evt) {
     })
     .then(() => {
       hidePopup(popupAvatar);
-      popupInputAvatar.removeAttribute('disabled', true)
     })
     .catch(err => console.log(err))
+    .finally(() => {
+      popupAvatarSave.textContent = 'Сохранить'
+      popupInputAvatar.removeAttribute('disabled', true)
+    })
 })
 
 // Запуск валидации всех форм
 enableValidation(settingsValidation);
-
-// Функция сохранения до того, как изображение прогрузится
-function loadImage(image, imageUrl, loading, errorCallback) {
-  const img = image;
-  img.src = imageUrl;
-  // Функция, которая записана в onload
-  // будет вызвана после загрузки изображения
-  img.onload = loading;
-  // В случае ошибки вылезет в консоль сообщение об ошибке
-  img.onerror = errorCallback;
-}
-
-// Функция вывода ошибки сохранения
-function errorLoading() {
-  console.log('Изображение не прогрузилось. Проверьте подключение.')
-}
 
 // Функция загрузки сохранения
 function isLoading(popupSave) {
